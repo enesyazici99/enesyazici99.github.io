@@ -1,7 +1,12 @@
-# app-ads.txt - Brick Smash (com.enesyazici.bricksmash / App Store 6792800231)
-# Kaynak: AdMob (DIRECT) + AppLovin MAX + Unity Ads + Liftoff Monetize (Vungle) panelleri.
+# app-ads.txt - BU DOSYA IKI UYGULAMAYI BIRDEN YETKILENDIRIR (satirlar YAYINCI seviyesinde):
+#   Brick Smash   (com.enesyazici.bricksmash / App Store 6792800231)
+#   Hexa Mahjong  (com.enesyazici.hexamahjong / App Store 6814275463)
+# Iki magaza kaydi da bu alan adini gosteriyor: ASC Marketing URL = https://enesyazici99.github.io,
+# Play Store ayarlari -> Website = ayni kok (Hexa icin 2026-09-22'de eklendi; yoksa Android tarafinda
+# app-ads.txt HIC taranmaz). Yeni uygulama eklenince buraya satir degil, sadece bu basliga ad yazilir.
+# Kaynak: AdMob (DIRECT) + AppLovin MAX + Unity Ads + Liftoff Monetize (Vungle) + Mintegral panelleri.
 # Panel listeleri AYDA BIR degisir - her surumden once kontrol et.
-# Son guncelleme: 2026-09-05 (Liftoff Monetize/Vungle listesi eklendi: +352 satir).
+# Son guncelleme: 2026-09-22 (Mintegral publisher 75287 DIRECT + reseller listesi; baslik iki uygulamaya gore).
 
 applovin.com, fa1533d11d8518475e3619c8bce4b646, DIRECT
 google.com, pub-3654210634025819, DIRECT, f08c47fec0942fa0
