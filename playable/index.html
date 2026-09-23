@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BrickSmash Playable — Test</title>
+<style>
+  :root { --bg: #16121f; --panel: #221c30; --line: #362d4a; --ink: #f3eff9; --dim: #a79fb8; --acc: #ffc62e; --acc-ink: #2b1a00; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; padding: 12px 18px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { margin: 0; font-size: 16px; font-weight: 700; letter-spacing: .01em; }
+  header h1 span { color: var(--dim); font-weight: 500; }
+  .devices { display: flex; flex-wrap: wrap; gap: 6px; }
+  .devices button, .act { font: 600 13px/1 inherit; font-family: inherit; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; cursor: pointer; text-decoration: none; }
+  .devices button[aria-pressed="true"] { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); }
+  .devices button:focus-visible, .act:focus-visible { outline: 2px solid var(--acc); outline-offset: 2px; }
+  .spacer { flex: 1; }
+  main { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 18px; }
+  .frame { position: relative; flex: 0 0 auto; border-radius: 28px; padding: 10px; background: #0b0911; box-shadow: 0 0 0 1px #3b3150, 0 20px 60px rgba(0,0,0,.5); }
+  .frame iframe { display: block; border: 0; border-radius: 20px; background: #6cc3f2; transform-origin: 0 0; }
+  footer { padding: 10px 18px 14px; color: var(--dim); font-size: 13px; text-align: center; }
+  footer code { color: var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <h1>BrickSmash Playable <span>· test</span></h1>
+  <div class="devices" role="group" aria-label="Ekran boyutu">
+    <button data-w="390" data-h="844" aria-pressed="true">iPhone 15</button>
+    <button data-w="375" data-h="667">iPhone SE</button>
+    <button data-w="360" data-h="800">Android</button>
+    <button data-w="768" data-h="1024">iPad</button>
+    <button data-w="844" data-h="390">Yatay</button>
+  </div>
+  <span class="spacer"></span>
+  <button class="act" id="restart">↻ Baştan başlat</button>
+  <a class="act" href="play.html" target="_blank" rel="noopener">Tam ekran aç ↗</a>
+</header>
+<main id="stage">
+  <div class="frame" id="frame"><iframe id="play" src="play.html" title="BrickSmash playable" allow="autoplay"></iframe></div>
+</main>
+<footer>Ses için bir kez dokun. Reklam kabı (MRAID) dışında olduğumuz için INSTALL / PLAY NOW mağazayı yeni sekmede açar. Telefondan doğrudan <code>play.html</code> linkini aç.</footer>
+<script>
+  const frame = document.getElementById('frame'), ifr = document.getElementById('play'), stage = document.getElementById('stage');
+  let W = 390, H = 844;
+  function fit() {
+    const pad = 20, availW = stage.clientWidth - 36 - pad, availH = stage.clientHeight - 36 - pad;
+    const s = Math.min(1, availW / W, availH / H);
+    ifr.style.width = W + 'px'; ifr.style.height = H + 'px';
+    ifr.style.transform = 'scale(' + s + ')';
+    frame.style.width = (W * s + pad) + 'px'; frame.style.height = (H * s + pad) + 'px';
+  }
+  document.querySelectorAll('.devices button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.devices button').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    W = +b.dataset.w; H = +b.dataset.h; fit(); ifr.src = 'play.html';
+  }));
+  document.getElementById('restart').addEventListener('click', () => { ifr.src = 'play.html'; });
+  addEventListener('resize', fit); fit();
+</script>
+</body>
+</html>
