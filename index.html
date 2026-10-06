@@ -1,3 +1,418 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Enes Yazici</title></head>
-<body></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YG App Studio — Mobile games & apps</title>
+<meta name="description" content="YG App Studio is an independent mobile studio making puzzle games and smart little apps for iPhone and Android: Brick Smash, Pandoku, Sudoku Honeycomb, Sudoku Solitaire, Memorium, PixSort and Harmony.">
+<link rel="canonical" href="https://ygappstudio.com/">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YG App Studio">
+<meta property="og:title" content="YG App Studio — Mobile games & apps">
+<meta property="og:description" content="Puzzle games and smart little apps for iPhone and Android.">
+<meta property="og:url" content="https://ygappstudio.com/">
+<meta property="og:image" content="https://ygappstudio.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root {
+    --ink: #0b1633;
+    --ink-2: #4a5470;
+    --ink-3: #7c859c;
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --line: #e6e9f2;
+    --violet: #a63cff;
+    --indigo: #4b2bff;
+    --blue: #1f5bff;
+    --cyan: #00c8ff;
+    --grad: linear-gradient(120deg, var(--violet) 0%, var(--indigo) 38%, var(--blue) 70%, var(--cyan) 100%);
+    --radius: 22px;
+    --shadow: 0 1px 2px rgba(11, 22, 51, .04), 0 8px 24px rgba(11, 22, 51, .06);
+    --shadow-lift: 0 2px 4px rgba(11, 22, 51, .05), 0 18px 40px rgba(31, 91, 255, .14);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- header ---------- */
+  header.top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247, 248, 252, .78);
+    backdrop-filter: saturate(1.6) blur(14px); -webkit-backdrop-filter: saturate(1.6) blur(14px);
+    border-bottom: 1px solid rgba(230, 233, 242, .7);
+  }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand img { height: 30px; width: auto; }
+  .brand span { font-weight: 800; letter-spacing: .02em; font-size: 15px; text-transform: uppercase; }
+  nav.links { display: flex; gap: 28px; }
+  nav.links a { text-decoration: none; font-size: 15px; font-weight: 600; color: var(--ink-2); transition: color .2s; }
+  nav.links a:hover { color: var(--blue); }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; padding: 88px 0 72px; }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(70px); opacity: .55;
+  }
+  .hero::before { width: 520px; height: 520px; left: -160px; top: -120px; background: radial-gradient(circle, rgba(166, 60, 255, .45), transparent 65%); }
+  .hero::after { width: 560px; height: 560px; right: -180px; top: 40px; background: radial-gradient(circle, rgba(0, 200, 255, .40), transparent 65%); }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px;
+    background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow);
+    font-size: 13px; font-weight: 700; color: var(--ink-2);
+  }
+  .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); }
+  h1 {
+    margin: 20px 0 18px; font-size: clamp(40px, 6vw, 66px); line-height: 1.04; letter-spacing: -.035em; font-weight: 850;
+  }
+  h1 .g { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(17px, 2vw, 20px); color: var(--ink-2); max-width: 520px; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 14px;
+    font-weight: 700; font-size: 16px; text-decoration: none; transition: transform .2s, box-shadow .2s;
+  }
+  .btn.primary { color: #fff; background: var(--grad); box-shadow: 0 10px 26px rgba(75, 43, 255, .28); }
+  .btn.ghost { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .btn:hover { transform: translateY(-2px); }
+
+  .mosaic { position: relative; height: 440px; }
+  .mosaic img {
+    position: absolute; width: 118px; height: 118px; border-radius: 27px;
+    box-shadow: 0 14px 34px rgba(11, 22, 51, .18), 0 2px 6px rgba(11, 22, 51, .08);
+    animation: bob 7s ease-in-out infinite;
+  }
+  .mosaic img:nth-child(1) { left: 34%; top: 2%;  width: 150px; height: 150px; border-radius: 34px; animation-delay: -1s; }
+  .mosaic img:nth-child(2) { left: 4%;  top: 18%; transform: rotate(-8deg); animation-delay: -3s; }
+  .mosaic img:nth-child(3) { left: 72%; top: 14%; transform: rotate(7deg);  animation-delay: -5s; }
+  .mosaic img:nth-child(4) { left: 16%; top: 54%; transform: rotate(5deg);  animation-delay: -2s; }
+  .mosaic img:nth-child(5) { left: 46%; top: 44%; animation-delay: -4s; }
+  .mosaic img:nth-child(6) { left: 76%; top: 52%; transform: rotate(-6deg); animation-delay: -6s; }
+  .mosaic img:nth-child(7) { left: 40%; top: 76%; width: 96px; height: 96px; border-radius: 22px; transform: rotate(-4deg); animation-delay: -2.5s; }
+  @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+  @media (prefers-reduced-motion: reduce) { .mosaic img { animation: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- sections ---------- */
+  section.block { padding: 72px 0; }
+  .head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+  .head h2 { margin: 0; font-size: clamp(30px, 4vw, 42px); letter-spacing: -.03em; line-height: 1.1; font-weight: 850; }
+  .head p { margin: 0; color: var(--ink-3); font-size: 16px; max-width: 360px; }
+  .kicker { display: block; font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px;
+            background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .card {
+    position: relative; display: flex; gap: 22px; padding: 24px; background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow); transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .card.feature { grid-column: 1 / -1; padding: 32px; align-items: center; overflow: hidden; }
+  .card.feature::after {
+    content: ""; position: absolute; right: -80px; top: -80px; width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(31, 91, 255, .12), transparent 70%); pointer-events: none;
+  }
+
+  .feature .shots { position: relative; flex: none; width: 300px; height: 290px; margin: -6px 0 -6px auto; }
+  .feature .shots img {
+    position: absolute; width: 120px; border-radius: 16px; border: 3px solid #fff;
+    box-shadow: 0 16px 34px rgba(11, 22, 51, .22);
+  }
+  .feature .shots img:nth-child(1) { left: 6px; top: 28px; transform: rotate(-7deg); }
+  .feature .shots img:nth-child(2) { left: 86px; top: 4px; width: 132px; z-index: 2; }
+  .feature .shots img:nth-child(3) { left: 172px; top: 28px; transform: rotate(7deg); }
+  .icon { flex: none; width: 104px; height: 104px; border-radius: 24px; box-shadow: 0 8px 20px rgba(11, 22, 51, .14); }
+  .feature .icon { width: 148px; height: 148px; border-radius: 33px; }
+  .body { min-width: 0; display: flex; flex-direction: column; }
+  .tag { align-self: flex-start; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--blue);
+         background: rgba(31, 91, 255, .08); padding: 4px 10px; border-radius: 999px; margin-bottom: 8px; }
+  .card h3 { margin: 0; font-size: 22px; letter-spacing: -.02em; line-height: 1.2; }
+  .feature h3 { font-size: 30px; }
+  .sub { margin: 2px 0 8px; color: var(--ink-3); font-weight: 600; font-size: 15px; }
+  .desc { margin: 0 0 16px; color: var(--ink-2); font-size: 15.5px; }
+  .feature .desc { font-size: 17px; max-width: 560px; }
+  .stores { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: auto; }
+  .stores a { display: block; border-radius: 8px; transition: transform .2s, opacity .2s; }
+  .stores a:hover { transform: translateY(-1px); opacity: .88; }
+  .badge-apple { height: 42px; width: auto; }
+  .badge-google { height: 62px; width: auto; margin: -10px -6px; }
+  .legal { margin-top: 12px; font-size: 13px; color: var(--ink-3); }
+  .legal a { color: var(--ink-3); text-decoration: none; }
+  .legal a:hover { color: var(--blue); text-decoration: underline; }
+
+  /* ---------- about ---------- */
+  .about { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
+  .about .logo-card { background: #fff; border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow); padding: 48px 40px; }
+  .about .logo-card img { width: 100%; max-width: 360px; margin: 0 auto; }
+  .about h2 { margin: 0 0 16px; font-size: clamp(30px, 4vw, 42px); letter-spacing: -.03em; line-height: 1.1; font-weight: 850; }
+  .about p { color: var(--ink-2); font-size: 17px; margin: 0 0 14px; }
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; }
+  .pillar { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .pillar b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .pillar span { color: var(--ink-3); font-size: 14px; line-height: 1.45; display: block; }
+
+  /* ---------- contact ---------- */
+  .contact {
+    position: relative; overflow: hidden; border-radius: 30px; padding: 56px 48px; color: #fff; background: var(--grad);
+    display: flex; align-items: center; justify-content: space-between; gap: 32px; box-shadow: 0 24px 60px rgba(75, 43, 255, .25);
+  }
+  .contact::before { content: ""; position: absolute; inset: 0; background: radial-gradient(600px 300px at 85% 0%, rgba(255, 255, 255, .22), transparent 60%); }
+  .contact > * { position: relative; }
+  .contact h2 { margin: 0 0 8px; font-size: clamp(28px, 4vw, 40px); letter-spacing: -.03em; line-height: 1.1; font-weight: 850; }
+  .contact p { margin: 0; opacity: .9; font-size: 17px; max-width: 520px; }
+  .contact .btn { background: #fff; color: var(--indigo); flex: none; }
+
+  footer { padding: 40px 0 56px; color: var(--ink-3); font-size: 14px; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer .brand img { height: 24px; }
+  footer .brand span { font-size: 13px; color: var(--ink-2); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--blue); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 920px) {
+    .hero { padding: 48px 0 24px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 8px; }
+    .mosaic { height: 330px; max-width: 460px; width: 100%; margin: 0 auto; }
+    .mosaic img { width: 88px; height: 88px; border-radius: 20px; }
+    .mosaic img:nth-child(1) { width: 112px; height: 112px; border-radius: 25px; }
+    .mosaic img:nth-child(7) { width: 72px; height: 72px; border-radius: 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .card.feature { flex-wrap: wrap; }
+    .feature .shots { order: 3; width: 100%; height: auto; margin: 8px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .feature .shots img { position: static; width: 100% !important; transform: none !important; border-radius: 14px; box-shadow: 0 8px 18px rgba(11, 22, 51, .16); }
+    .about { grid-template-columns: 1fr; gap: 32px; }
+    .head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+  @media (max-width: 640px) {
+    nav.links { gap: 18px; }
+    .brand span { font-size: 14px; }
+    nav.links a.opt { display: none; }
+    .wrap { padding: 0 16px; }
+    section.block { padding: 48px 0; }
+    .card { flex-direction: column; gap: 16px; padding: 20px; }
+    .card.feature { padding: 22px; align-items: flex-start; }
+    .icon, .feature .icon { width: 88px; height: 88px; border-radius: 20px; }
+    .feature h3 { font-size: 24px; }
+    .pillars { grid-template-columns: 1fr; }
+    .contact { flex-direction: column; align-items: flex-start; padding: 36px 24px; border-radius: 24px; }
+    .about .logo-card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="YG App Studio home">
+      <img src="/assets/mark.webp" alt="" width="46" height="30">
+      <span>YG App Studio</span>
+    </a>
+    <nav class="links" aria-label="Main">
+      <a href="#games">Games</a>
+      <a class="opt" href="#apps">Apps</a>
+      <a class="opt" href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i></i>Independent mobile studio</span>
+        <h1>Playful puzzles.<br><span class="g">Smart little apps.</span></h1>
+        <p class="lead">We design and build mobile games and apps for iPhone and Android — physics puzzles, daily brain teasers and AI-powered tools that are easy to pick up and hard to put down.</p>
+        <div class="cta">
+          <a class="btn primary" href="#games">Explore our games</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="mosaic" aria-hidden="true">
+        <img src="/assets/apps/bricksmash.webp" alt="">
+        <img src="/assets/apps/sudoku.webp" alt="">
+        <img src="/assets/apps/pixsort.webp" alt="">
+        <img src="/assets/apps/pandoku.webp" alt="">
+        <img src="/assets/apps/memorium.webp" alt="">
+        <img src="/assets/apps/sudoku-solitaire.webp" alt="">
+        <img src="/assets/apps/harmony.webp" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="games">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="kicker">Games</span><h2>Made to be played</h2></div>
+        <p>Satisfying physics, clean logic and a fresh puzzle every day.</p>
+      </div>
+      <div class="grid">
+
+        <article class="card feature">
+          <img class="icon" src="/assets/apps/bricksmash.webp" alt="Brick Smash app icon" width="148" height="148">
+          <div class="body">
+            <span class="tag">Featured</span>
+            <h3>Brick Smash</h3>
+            <p class="sub">Blast Puzzle Fun!</p>
+            <p class="desc">Load the cannon, take aim and knock tumbling brick towers off the table. Every brick has real weight — line up the perfect shot and watch it all come crashing down.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6792800231" target="_blank" rel="noopener" aria-label="Brick Smash on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.enesyazici.bricksmash" target="_blank" rel="noopener" aria-label="Brick Smash on Google Play"><img class="badge-google" src="/assets/badges/google-play.png" alt="Get it on Google Play"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/bricksmash/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/bricksmash/terms-of-service.html">Terms</a></div>
+          </div>
+          <div class="shots" aria-hidden="true">
+            <img src="/assets/apps/bricksmash-shot1.webp" alt="" width="460" height="995" loading="lazy">
+            <img src="/assets/apps/bricksmash-shot2.webp" alt="" width="460" height="995" loading="lazy">
+            <img src="/assets/apps/bricksmash-shot3.webp" alt="" width="460" height="995" loading="lazy">
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/pandoku.webp" alt="Pandoku app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>Pandoku</h3>
+            <p class="sub">Daily Puzzle</p>
+            <p class="desc">A logic puzzle you solve by thinking, never by guessing — every board has exactly one answer.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6795878384" target="_blank" rel="noopener" aria-label="Pandoku on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.enesyazici.pandoku" target="_blank" rel="noopener" aria-label="Pandoku on Google Play"><img class="badge-google" src="/assets/badges/google-play.png" alt="Get it on Google Play"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/pandoku/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/pandoku/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/sudoku.webp" alt="Sudoku Honeycomb app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>Sudoku Honeycomb</h3>
+            <p class="sub">Daily Puzzle</p>
+            <p class="desc">Classic Sudoku on hexagonal grids — each solved section reveals part of a hidden photo.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6756542413" target="_blank" rel="noopener" aria-label="Sudoku Honeycomb on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.enesyazici.sudokuGame" target="_blank" rel="noopener" aria-label="Sudoku Honeycomb on Google Play"><img class="badge-google" src="/assets/badges/google-play.png" alt="Get it on Google Play"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/sudoku/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/sudoku/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/sudoku-solitaire.webp" alt="Sudoku Solitaire app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>Sudoku Solitaire</h3>
+            <p class="sub">Daily Puzzle</p>
+            <p class="desc">Flip cards, solve Sudoku and uncover beautiful photos in a card-based puzzle adventure.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6757099302" target="_blank" rel="noopener" aria-label="Sudoku Solitaire on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+              <a href="https://play.google.com/store/apps/details?id=com.enesyazici.sudokuSolitaire" target="_blank" rel="noopener" aria-label="Sudoku Solitaire on Google Play"><img class="badge-google" src="/assets/badges/google-play.png" alt="Get it on Google Play"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/sudoku-solitaire/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/sudoku-solitaire/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/memorium.webp" alt="Memorium app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>Memorium</h3>
+            <p class="sub">Color Match Puzzle</p>
+            <p class="desc">A memory-matching puzzle set in a quiet museum of the world's most remarkable places.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6764378641" target="_blank" rel="noopener" aria-label="Memorium on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/memorium/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/memorium/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="apps" style="padding-top: 24px">
+    <div class="wrap">
+      <div class="head">
+        <div><span class="kicker">Apps</span><h2>Smart, simple tools</h2></div>
+        <p>Everyday helpers with a little intelligence built in.</p>
+      </div>
+      <div class="grid">
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/pixsort.webp" alt="PixSort app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>PixSort</h3>
+            <p class="sub">Swipe Photo Cleaner</p>
+            <p class="desc">Clean up your camera roll with a swipe — on-device AI sorts your photos into smart categories.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6761251989" target="_blank" rel="noopener" aria-label="PixSort on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/pixsort/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/pixsort/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="icon" src="/assets/apps/harmony.webp" alt="Harmony app icon" width="104" height="104" loading="lazy">
+          <div class="body">
+            <h3>Harmony</h3>
+            <p class="sub">Color Analysis AI</p>
+            <p class="desc">A personal color analysis from a single selfie — your season, your palette and a full style report.</p>
+            <div class="stores">
+              <a href="https://apps.apple.com/app/id6765498541" target="_blank" rel="noopener" aria-label="Harmony on the App Store"><img class="badge-apple" src="/assets/badges/app-store.svg" alt="Download on the App Store"></a>
+            </div>
+            <div class="legal"><a href="/app-legal-pages/harmony/privacy-policy.html">Privacy</a> · <a href="/app-legal-pages/harmony/terms-of-service.html">Terms</a></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap about">
+      <div class="logo-card"><img src="/assets/logo-full.webp" alt="YG App Studio logo" width="720" height="472" loading="lazy"></div>
+      <div>
+        <span class="kicker">About us</span>
+        <h2>A small studio with big attention to detail</h2>
+        <p>YG App Studio is an independent team making games and apps we love to use ourselves. We keep our ideas simple, polish every interaction and keep improving each title long after launch.</p>
+        <p>From tactile physics puzzles to calm daily brain teasers and practical AI tools, everything we ship is built to feel good in your hand.</p>
+        <div class="pillars">
+          <div class="pillar"><b>Play first</b><span>Easy to learn, satisfying to master.</span></div>
+          <div class="pillar"><b>Always improving</b><span>Regular updates shaped by our players.</span></div>
+          <div class="pillar"><b>Respect for users</b><span>Clear privacy policies for every app.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact" style="padding-top: 24px">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Let's talk</h2>
+          <p>Questions, feedback, partnerships or press — we'd love to hear from you.</p>
+        </div>
+        <a class="btn" href="mailto:admin@ygappstudio.com">admin@ygappstudio.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/mark.webp" alt="" width="37" height="24"><span>YG App Studio</span></a>
+    <div>© 2026 YG App Studio · <a href="mailto:admin@ygappstudio.com">Contact</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
