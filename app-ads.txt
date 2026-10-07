@@ -1,6 +1,7 @@
-# app-ads.txt - BU DOSYA IKI UYGULAMAYI BIRDEN YETKILENDIRIR (satirlar YAYINCI seviyesinde):
-#   Brick Smash   (com.enesyazici.bricksmash / App Store 6792800231)
-#   Hexa Mahjong  (com.enesyazici.hexamahjong / App Store 6814275463)
+# app-ads.txt - BU DOSYA TUM UYGULAMALARI YETKILENDIRIR (satirlar YAYINCI seviyesinde):
+#   Brick Smash    (com.enesyazici.bricksmash / App Store 6792800231)
+#   Hexa Mahjong   (com.enesyazici.hexamahjong / App Store 6814275463)
+#   Bullet Express (com.enesyazici.bullettrain / App Store 6819230327) - 2026-10-07; ASC Marketing URL / Play Website = https://ygappstudio.com
 # Iki magaza kaydi da bu alan adini gosteriyor: ASC Marketing URL = https://enesyazici99.github.io,
 # Play Store ayarlari -> Website = ayni kok (Hexa icin 2026-09-22'de eklendi; yoksa Android tarafinda
 # app-ads.txt HIC taranmaz). Yeni uygulama eklenince buraya satir degil, sadece bu basliga ad yazilir.
