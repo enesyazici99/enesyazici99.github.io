@@ -28,7 +28,14 @@
 <body>
 <header>
   <h1>Bullet Express Playable <span>· test</span></h1>
-  <div class="devices" role="group" aria-label="Ekran boyutu">
+  <div class="devices" id="varyant" role="group" aria-label="Oynanış">
+    <button data-v="birlestir_kazan" aria-pressed="true">Birleştir · kazan</button>
+    <button data-v="birlestir_fail">Birleştir · fail</button>
+    <button data-v="birlestir_efsane">Birleştir · efsane dron</button>
+    <button data-v="ogretici">Öğretici</button>
+    <button data-v="dron">Dronu yönet</button>
+  </div>
+  <div class="devices" id="cihaz" role="group" aria-label="Ekran boyutu">
     <button data-w="390" data-h="844" aria-pressed="true">iPhone 15</button>
     <button data-w="375" data-h="667">iPhone SE</button>
     <button data-w="360" data-h="800">Android</button>
@@ -37,15 +44,17 @@
   </div>
   <span class="spacer"></span>
   <button class="act" id="restart">↻ Baştan başlat</button>
-  <a class="act" href="play.html" target="_blank" rel="noopener">Tam ekran aç ↗</a>
+  <a class="act" id="tam" href="birlestir_kazan.html" target="_blank" rel="noopener">Tam ekran aç ↗</a>
 </header>
 <main id="stage">
-  <div class="frame" id="frame"><iframe id="play" src="play.html" title="Bullet Express playable" allow="autoplay"></iframe></div>
+  <div class="frame" id="frame"><iframe id="play" src="birlestir_kazan.html" title="Bullet Express playable" allow="autoplay"></iframe></div>
 </main>
-<footer>Ses için bir kez dokun. Reklam kabı (MRAID) dışında olduğumuz için INSTALL / PLAY FREE mağazayı yeni sekmede açar. Telefondan doğrudan <code>play.html</code> linkini aç.</footer>
+<footer>Ses için bir kez dokun. Reklam kabı (MRAID) dışında olduğumuz için INSTALL / PLAY FREE / CLAIM NOW mağazayı yeni sekmede açar. Telefondan doğrudan <code>&lt;oynanış&gt;.html</code> linkini aç (ör. <code>birlestir_kazan.html</code>).</footer>
 <script>
   const frame = document.getElementById('frame'), ifr = document.getElementById('play'), stage = document.getElementById('stage');
-  let W = 390, H = 844;
+  let W = 390, H = 844, V = new URLSearchParams(location.search).get('v') || 'birlestir_kazan';
+  const yukle = () => { ifr.src = V + '.html'; document.getElementById('tam').href = V + '.html';
+    document.querySelectorAll('#varyant button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.v === V ? 'true' : 'false')); };
   function fit() {
     const pad = 20, availW = stage.clientWidth - 36 - pad, availH = stage.clientHeight - 36 - pad;
     const s = Math.min(1, availW / W, availH / H);
@@ -53,12 +62,13 @@
     ifr.style.transform = 'scale(' + s + ')';
     frame.style.width = (W * s + pad) + 'px'; frame.style.height = (H * s + pad) + 'px';
   }
-  document.querySelectorAll('.devices button').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('.devices button').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
-    W = +b.dataset.w; H = +b.dataset.h; fit(); ifr.src = 'play.html';
+  document.querySelectorAll('#cihaz button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('#cihaz button').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    W = +b.dataset.w; H = +b.dataset.h; fit(); yukle();
   }));
-  document.getElementById('restart').addEventListener('click', () => { ifr.src = 'play.html'; });
-  addEventListener('resize', fit); fit();
+  document.querySelectorAll('#varyant button').forEach((b) => b.addEventListener('click', () => { V = b.dataset.v; history.replaceState(null, '', '?v=' + V); yukle(); }));
+  document.getElementById('restart').addEventListener('click', yukle);
+  addEventListener('resize', fit); fit(); yukle();
 </script>
 </body>
 </html>
